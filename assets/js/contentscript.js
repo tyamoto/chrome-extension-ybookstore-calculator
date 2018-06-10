@@ -1,6 +1,7 @@
 (function() {
 
     (function () {
+        getCurrentUsage()
 //        if (document.URL.match(/\/[dg]p\//) == null) return;
 //
 //        chrome.extension.sendRequest(
@@ -42,20 +43,38 @@
 //        });
     })();
 
-    function searchBookstore(title) {
+    function getCurrentUsage() {
         $.ajax({
-            type: "GET",
-            url: "https://bookstore.yahoo.co.jp/search?keyword=%22" + encodeURIComponent(title) + "%22"
-        }).done(function(data) {
-            var anchor = $(data).find('#yjContentsBody > div.area-unitBC > div.mod-searchResult > div > div > table:nth-child(1) > tbody > tr:nth-child(3) > td:nth-child(1) > a');
-            $('#bssLoader').fadeOut();
-            if (anchor.length == 1) {
-                // console.log(anchor.attr('href'));
-                $('#bssResult').append('<a href="' + anchor.attr('href') + '" target="_blank" class="found">見つかりました</a>');
-            }
-            else {
-                $('#bssResult').append('見つかりませんでした');
-            }
+            url: 'https://detail.wallet.yahoo.co.jp/history'
+        }).done(function(d) {
+            var m, arg = {}
+            m = d.match(/^\s+yid: "(.+)"/m)
+            arg['yid'] = m[1] ? m[1] : ''
+            m = d.match(/^\s+crumb: "(.+)"/m)
+            arg['.crumb'] = m[1] ? m[1] : ''
+            if (! (arg['yid'] && arg['.crumb'])) return false
+            var dt = new Date()
+            arg['ym'] = dt.getFullYear() + ('0' + (dt.getMonth() + 1)).slice(-2)
+            // console.log($.param(arg))
+            $.ajax({
+                url: 'https://detail.wallet.yahoo.co.jp/history/api',
+                dataType: "json",
+                data: arg
+            }).done(function(d) {
+                if (d.coce !== '00') return false
+                var usage = d.month_info.total_amount
+                console.log(usage)
+            })
+            /*
+             * $('#bssLoader').fadeOut();
+             * if (anchor.length == 1) {
+             *     // console.log(anchor.attr('href'));
+             *     $('#bssResult').append('<a href='' + anchor.attr('href') + '' target='_blank' class='found'>見つかりました</a>');
+             * }
+             * else {
+             *     $('#bssResult').append('見つかりませんでした');
+             * }
+             */
         });
     }
 

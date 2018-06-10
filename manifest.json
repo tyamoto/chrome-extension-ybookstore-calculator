@@ -16,7 +16,7 @@
         "16": "images/icon16.png"
     },
     "manifest_version": 2,
-    "name": "ブックストア検索",
+    "name": "ブックストア残高計算",
     "description": "ブックストアでの購入可能残高を計算します",
     "version": "1.0",
     "web_accessible_resources": [ "images/ajax-loader.gif", "images/logo.jpg" ],
