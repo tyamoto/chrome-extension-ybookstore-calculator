@@ -1,49 +1,8 @@
 (function() {
 
-    (function () {
-        getCurrentUsage()
-//        if (document.URL.match(/\/[dg]p\//) == null) return;
-//
-//        chrome.extension.sendRequest(
-//            { name: "get" },
-//            function(response) {
-//                var isEbook = $("li:contains('ISBN-13')").length == 0;
-//                var title   = isEbook ? $("#ebooksProductTitle").text() : $("#productTitle").text();
-//                if (! title) {
-//                    return;
-//                }
-//                title = title.replace(/\u2015/g, ' ').replace(/\s+/, ' ');
-//                console.log(title,);
-//                if (title.match(/^([^\s]+\s+[^\s]+)\s+.+/) || title.match(/^(.+)\s+\(\S+\)$/)) {
-//                    title = RegExp.$1;
-//                    // console.log(title,);
-//                    if (title.match(/^(.+)[(（]/) || title.match(/^(.+)\s+\d+巻/)) {
-//                        title = RegExp.$1;
-//                        console.log(title,);
-//                    }
-//                }
-//                var htmlToAppend = '<div id="bssOutput"><p class="lead1">この本がブックストアにあるか検索</p>'
-//                                 + '<div id="bssLoader"><img src="' + chrome.extension.getURL("images/ajax-loader.gif") + '" width="56" height="21" /></div>'
-//                                 + '<div id="bssResult"></div></div>';
-//                if ($("#olpDivId").length > 0) {
-//                    $("#olpDivId").after(htmlToAppend);
-//                } else {
-//                    $("#MediaMatrix").after(htmlToAppend);
-//                }
-//
-//                /*
-//                 * console.log(
-//                 *     title,
-//                 *     encodeURI(title),
-//                 *     encodeURIComponent(title),
-//                 *     escape(title)
-//                 * );
-//                 */
-//                searchBookstore(title);
-//        });
-    })();
+    getCurrentUsage(drawMessage)
 
-    function getCurrentUsage() {
+    function getCurrentUsage(callback) {
         $.ajax({
             url: 'https://detail.wallet.yahoo.co.jp/history'
         }).done(function(d) {
@@ -61,21 +20,30 @@
                 dataType: "json",
                 data: arg
             }).done(function(d) {
-                if (d.coce !== '00') return false
+                if (d.code !== '00') return false
                 var usage = d.month_info.total_amount
-                console.log(usage)
+                callback(Number(usage.replace(',', '')))
             })
-            /*
-             * $('#bssLoader').fadeOut();
-             * if (anchor.length == 1) {
-             *     // console.log(anchor.attr('href'));
-             *     $('#bssResult').append('<a href='' + anchor.attr('href') + '' target='_blank' class='found'>見つかりました</a>');
-             * }
-             * else {
-             *     $('#bssResult').append('見つかりませんでした');
-             * }
-             */
         });
+    }
+
+    function drawMessage(usage) {
+        var price, m
+        m = $('p#price').text().match(/^価格：\n(.+)円\+税(.+)円/m)
+        // console.log(m)
+        if (! (m[1] && m[2])) return
+        tax_included = Number(m[1].replace(',', '')) + Number(m[2].replace(',', ''))
+        total = usage + tax_included
+        var is_exceed_limit = (total > 10000)
+        console.log(is_exceed_limit)
+        // console.log(total, usage, tax_included)
+        var htmlToAppend = '<div class="att-Wrap"><p>'
+            + '今月料金: ' + addComma(total) + ' = ' + addComma(usage) + ' + ' + addComma(tax_included)
+        $('#premcamArea').after(htmlToAppend)
+    }
+
+    function addComma(num) {
+        return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
     }
 
 }).call(this);
