@@ -35,11 +35,19 @@
         tax_included = Number(m[1].replace(',', '')) + Number(m[2].replace(',', ''))
         total = usage + tax_included
         var is_exceed_limit = (total > 10000)
-        console.log(is_exceed_limit)
+        // console.log(is_exceed_limit)
         // console.log(total, usage, tax_included)
-        var htmlToAppend = '<div class="att-Wrap"><p>'
-            + '今月料金: ' + addComma(total) + ' = ' + addComma(usage) + ' + ' + addComma(tax_included)
+        var htmlToAppend =
+            '<div class="att-Wrap" id="bscResult">' +
+            '<div class="bscLine bscTotal">今月の料金（計）<span class="bscPriceTotal' + (is_exceed_limit ? ' bscRed">' : '">') + addComma(total) + ' 円</span></div>' +
+            '<div class="bscLine">価格 <span class="bscPrice">' + addComma(tax_included) + ' 円</span></div>' +
+            '<div class="bscLine">課金済み金額 <span class="bscPrice">' + addComma(usage) + ' 円</span></div>' +
+            '</div>'
         $('#premcamArea').after(htmlToAppend)
+    }
+
+    function addColor(html, b) {
+        return b ? '<p style="color: #f00">' + html + '</p>' : html;
     }
 
     function addComma(num) {
