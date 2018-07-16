@@ -38,12 +38,13 @@
         // console.log(is_exceed_limit)
         // console.log(total, usage, tax_included)
         var htmlToAppend =
-            '<div class="att-Wrap" id="bscResult">' +
+            // '<div class="att-Wrap" id="bscResult">' +
+            '<div class="left-bottom-float">' +
             '<div class="bscLine bscTotal">今月の料金（計）<span class="bscPriceTotal' + (is_exceed_limit ? ' bscRed">' : '">') + addComma(total) + ' 円</span></div>' +
             '<div class="bscLine">価格 <span class="bscPrice">' + addComma(tax_included) + ' 円</span></div>' +
             '<div class="bscLine">課金済み金額 <span class="bscPrice">' + addComma(usage) + ' 円</span></div>' +
             '</div>'
-        $('#premcamArea').after(htmlToAppend)
+        $('#footer').after(htmlToAppend)
     }
 
     function addColor(html, b) {

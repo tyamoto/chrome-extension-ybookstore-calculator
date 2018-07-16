@@ -4,30 +4,56 @@
 
 .bscLine {
     position: relative;
-    padding-bottom: 0px;
+    padding-bottom: 10px;
     margin-bottom: 0px;
 }
 
 .bscTotal {
     line-height: 1.5;
-    border-bottom: 1px dashed #999;
+    border-bottom: 1px dashed #D9D9D9;
     padding-bottom: 5px;
     margin-bottom: 5px;
 }
 
 .bscRed {
     color: #f00;
+    font-weight: bold;
 }
 
 .bscPrice {
     position: absolute;
     right: 0px;
-    /* bottom: 5px; */
+    font-size: 14px;
+    bottom: 5px;
 }
 
 .bscPriceTotal {
     position: absolute;
     right: 0px;
     bottom: 2px;
-    font-size: 150%;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.left-bottom-float {
+    background: #FFFFFF;
+    display: block;
+    border: 1px solid #ddd;
+    /* margin-bottom: 10px; */
+    padding: 10px;
+    width: 200px;
+    height: auto;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    z-index: 2000;
+    border-radius: 5px 0 0 0;
+    /* animation: leadinModal-slideup 0.5s; */
+    -webkit-animation: leadinModal-slideup 0.5s;
+    -moz-animation: leadinModal-slideup 0.5s;
+    -ms-animation: leadinModal-slideup 0.5s;
+    -o-animation: leadinModal-slideup 0.5s;
+    -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.25);
+    /* box-shadow: 0px 0px 5px rgba(0,0,0,0.25); */
 }

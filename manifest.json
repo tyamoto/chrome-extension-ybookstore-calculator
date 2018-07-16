@@ -10,6 +10,12 @@
         "matches": [ "https://bookstore.yahoo.co.jp/shoshi-*" ],
         "run_at": "document_end"
     } ],
+    "background": {
+        "persistent": false,
+        "scripts": [
+            "/assets/js/background.js"
+        ]
+    },
     "icons": {
         "128": "images/icon128.png",
         "48": "images/icon48.png",
@@ -19,6 +25,10 @@
     "name": "ブックストア残高計算",
     "description": "ブックストアでの購入可能残高を計算します",
     "version": "1.0",
-    "web_accessible_resources": [ "images/ajax-loader.gif", "images/logo.jpg" ],
-    "permissions": [ "https://detail.wallet.yahoo.co.jp/history" ]
+    "web_accessible_resources": [ ],
+    "permissions": [
+        "https://detail.wallet.yahoo.co.jp/history",
+        "background",
+        "storage"
+    ]
 }

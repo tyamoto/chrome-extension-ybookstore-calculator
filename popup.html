@@ -3,19 +3,43 @@
 <head>
     <meta charset="utf-8" />
     <title>ブックストア残高計算</title>
-    <link rel="stylesheet" type="text/css" href="/static/siimple-3.0.0/dist/siimple.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/siimple-3.1.0/dist/siimple.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/Semantic-UI-2.3.3/dist/semantic.min.css">
     <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/Semantic-UI-2.3.3/dist/semantic.min.js"></script>
+    <style type="text/css">
+        body {
+            width: 260px;
+            background-color: #DADADA;
+        }
+       .ui.grid>.column:not(.row) {
+           padding-bottom: 0px;
+       }
+    </style>
 </head>
-<body>
-<div class="ui inverted large borderless fixed fluid menu orange column">
-    <a class="header item" id='top'>ブックストア残高計算</a>
-</div>
-
-<div class="container">
-    <div class="ui attached message">
-        <div class="header">
+<body style="width: 260px;">
+    <div class="ui middle grid">
+        <div class="column">
+            <h2 class="ui teal block center aligned top attached header">
+                <div class="content">
+                    ブックストア残高計算
+                </div>
+            </h2>
+            <div class="ui large form">
+                <div class="ui segment">
+                    <div class="field">
+                        <label>月次上限金額</label>
+                        <div class="ui left icon input">
+                            <i class="yen sign icon"></i>
+                            <input type="text" name="limit" placeholder="10,000">
+                        </div>
+                    </div>
+                    <button id="submit" class="ui fluid large teal button">保存</button>
+                    <div class="ui error message"></div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 </body>
+<script src="/assets/js/popup.js"></script>
 </html>
