@@ -1,18 +1,12 @@
-#bscResult {
-    /* margin:0; */
-}
-
 .bscLine {
     position: relative;
-    padding-bottom: 10px;
-    margin-bottom: 0px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .bscTotal {
     line-height: 1.5;
     border-bottom: 1px dashed #D9D9D9;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
 }
 
 .bscRed {
@@ -38,9 +32,13 @@
 .left-bottom-float {
     background: #FFFFFF;
     display: block;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     /* margin-bottom: 10px; */
-    padding: 10px;
+    border: 1px solid #D9D9D9;
+    padding: 10px 10px 0px;
+    font-size: 12px;
+    color: #4C4B4A;
+    line-height: 1.4em;
     width: 200px;
     height: auto;
     position: fixed;

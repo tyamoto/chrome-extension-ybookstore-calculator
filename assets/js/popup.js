@@ -1,44 +1,44 @@
 (function () {
-    // (function () {
-        // console.log($("input[name='limit']").val());
-        // chrome.storage.local.get(["limit"], function (value) {
-            // console.log(value.limit);
-            /*
-             * if (value.status == "start"){
-             *     $("#status_start").show();
-             *     $("#status_end").hide();
-             *     $("#status_open").hide();
-             * } else if (value.status == "end"){
-             *     $("#status_start").hide();
-             *     $("#status_end").show();
-             *     $("#status_open").hide();
-             * } else if (value.status == "open"){
-             *     $("#status_start").hide();
-             *     $("#status_end").hide();
-             *     $("#status_open").show();
-             * }
-             */
-        // });
-    // })();
+    // @link https://semantic-ui.com/behaviors/form.html
+    // $('.ui.large.form').form.settings.debug = true;
+    $('.ui.large.form').form({
+        fields: {
+            name: {
+                identifier: 'limit',
+                rules: [
+                    {
+                        type   : 'integer[1000..100000]',
+                        prompt : '1,000 から 100,000 の範囲で入力してください'
+                    }
+                ]
+            },
+        }
+    });
+
+/*
+ *         loadSettings = function(settings) {
+ *             console.log(settings);
+ *         };
+ *         chrome.runtime.sendMessage({
+ *           type: 'getSettings'
+ *         }, loadSettings);
+ */
+    chrome.storage.local.get(null, function(value) {
+        $("input[name='limit']").val(value.limit);
+    });
+
 
     $('#submit').click(function() {
+        console.log($("input[name='limit']").val());
         var m = {
-            method: 'get',
+            type: 'setSettings',
             limit: $("input[name='limit']").val()
         }
-        chrome.runtime.sendMessage(m, function(response) {
-            console.log(response)
+        // var settings = {t:1};
+        chrome.runtime.sendMessage(m, function(_settings) {
+            // settings = _settings;
         })
-        /*
-         * chrome.runtime.sendMessage({ status: "start" }, function (response) {
-         *     console.log(response.status)
-         *     $("#status_start").show()
-         *     $('#status_start').show()
-         *     $("#status_end").hide()
-         *     $("#status_open").hide()
-         * })
-         * pushMessege("Qiita", "START","/image/qiita_icon.png")
-         */
+        // console.log(settings);
     })
 
     // (function () {

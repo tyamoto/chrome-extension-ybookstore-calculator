@@ -6,14 +6,16 @@
     },
     "content_scripts": [ {
         "css": [ "/assets/css/style.css" ],
-        "js": [ "/assets/js/jquery-3.3.1.min.js", "/assets/js/contentscript.js" ],
+        "js": [ "/components/jquery/jquery-3.3.1.min.js", "/assets/js/content.js" ],
         "matches": [ "https://bookstore.yahoo.co.jp/shoshi-*" ],
         "run_at": "document_end"
     } ],
     "background": {
         "persistent": false,
         "scripts": [
-            "/assets/js/background.js"
+            "components/underscore/underscore.js",
+            "/assets/js/background.js",
+            "/assets/js/storage.js"
         ]
     },
     "icons": {
