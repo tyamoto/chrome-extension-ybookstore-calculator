@@ -1,6 +1,6 @@
 (function() {
-    var EMPTY_SETTINGS, INITIAL_SETTINGS, getSanitizedBindings, getSanitizedSettings, getSettings, setSettings,
-        __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+    let EMPTY_SETTINGS, INITIAL_SETTINGS, getSanitizedBindings, getSanitizedSettings, getSettings, setSettings,
+        __indexOf = [].indexOf || function(item) { for (let i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
     /*
      * INITIAL_SETTINGS = {
@@ -18,7 +18,7 @@
     };
 
     EMPTY_SETTINGS = (function(items) {
-        var callee, k, v;
+        let callee, k, v;
 
         callee = arguments.callee;
         if (_.isString(items)) {
@@ -29,7 +29,7 @@
             return [];
         } else if (_.isObject(items)) {
             return _.object((function() {
-                var _results;
+                let _results;
 
                 _results = [];
                 for (k in items) {
@@ -51,7 +51,7 @@
 
     getSettings = function(cb) {
         return chrome.storage.local.get(null, function(items) {
-            var binding, k, name, setBinding, settings, used, v;
+            let binding, k, name, setBinding, settings, used, v;
 
             /*
              * settings = {
@@ -69,7 +69,7 @@
                      *         } else if (k === 'bindings') {
                      *           used = null;
                      *           setBinding = function(bindings, name, binding) {
-                     *             var shortcuts;
+                     *             let shortcuts;
                      *
                      *             if (used == null) {
                      *               used = _.uniq(_.flatten(_.values(items.bindings), true).map(function(shortcuts) {
@@ -77,7 +77,7 @@
                      *               }));
                      *             }
                      *             bindings[name] = (function() {
-                     *               var _i, _len, _ref, _results;
+                     *               let _i, _len, _ref, _results;
                      *
                      *               _results = [];
                      *               for (_i = 0, _len = binding.length; _i < _len; _i++) {
@@ -116,7 +116,7 @@
 
 
     getSanitizedSettings = function(settings, key) {
-        var k, s, val, _v;
+        let k, s, val, _v;
 
         if (key == null) {
             key = null;
@@ -144,7 +144,7 @@
     };
 
     getSanitizedBindings = function(bindings, key) {
-        var b, binding, i, k, _i, _len, _ref, _v;
+        let b, binding, i, k, _i, _len, _ref, _v;
 
         if (key == null) {
             key = null;
@@ -174,7 +174,7 @@
     };
 
     setSettings = function(settings, cb) {
-        var _settings;
+        let _settings;
 
         if (cb == null) {
             cb = null;

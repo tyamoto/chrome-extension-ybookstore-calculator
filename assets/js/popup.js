@@ -15,14 +15,6 @@
         }
     });
 
-/*
- *         loadSettings = function(settings) {
- *             console.log(settings);
- *         };
- *         chrome.runtime.sendMessage({
- *           type: 'getSettings'
- *         }, loadSettings);
- */
     chrome.storage.local.get(null, function(value) {
         $("input[name='limit']").val(value.limit);
     });
@@ -30,15 +22,14 @@
 
     $('#submit').click(function() {
         console.log($("input[name='limit']").val());
-        var m = {
+        let m = {
             type: 'setSettings',
             limit: $("input[name='limit']").val()
         }
-        // var settings = {t:1};
         chrome.runtime.sendMessage(m, function(_settings) {
-            // settings = _settings;
+            console.log(_settings);
+            $("#messageSuccess").show();
         })
-        // console.log(settings);
     })
 
     // (function () {

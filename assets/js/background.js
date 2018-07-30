@@ -3,7 +3,7 @@
         // console.log(request);
         switch (request.type) {
             case 'setSettings':
-                var _settings = { limit: request.limit };
+                let _settings = { limit: request.limit };
                 chrome.storage.local.set(
                     _settings, function() {}
                 );
